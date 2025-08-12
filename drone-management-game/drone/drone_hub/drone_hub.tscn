@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4e2u54hxhdte"]
+
+[ext_resource type="Script" uid="uid://cuhf4g5ckg3ar" path="res://drone/drone_hub/drone_hub.gd" id="1_a7jjb"]
+
+[node name="DroneHub" type="Node2D"]
+script = ExtResource("1_a7jjb")

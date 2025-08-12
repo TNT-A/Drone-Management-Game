@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b85n17siep8ln"]
+[gd_scene load_steps=8 format=3 uid="uid://b85n17siep8ln"]
 
 [ext_resource type="Script" uid="uid://ywjkmf0p1nxk" path="res://Player/player.gd" id="1_btcbx"]
 [ext_resource type="Texture2D" uid="uid://cfa7wbrkxvjaj" path="res://icon.svg" id="1_l8h54"]
 [ext_resource type="PackedScene" uid="uid://b34h5ttgq5cvn" path="res://components/wasd_move/wasd_move.tscn" id="3_gwnis"]
 [ext_resource type="PackedScene" uid="uid://dcs4pn557ooqs" path="res://Player/player_cam.tscn" id="4_gwnis"]
+[ext_resource type="PackedScene" uid="uid://d4e2u54hxhdte" path="res://drone/drone_hub/drone_hub.tscn" id="5_k53q1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hvfyp"]
 radius = 16.0
@@ -35,3 +36,5 @@ host = NodePath("..")
 speed = 250
 
 [node name="PlayerCam" parent="CharacterBody2D" instance=ExtResource("4_gwnis")]
+
+[node name="DroneHub" parent="." instance=ExtResource("5_k53q1")]

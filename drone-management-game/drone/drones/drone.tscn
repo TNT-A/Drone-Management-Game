@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsjkb5ro0gdfu"]
+
+[ext_resource type="Script" uid="uid://61wuemi4nef3" path="res://drone/drones/drone.gd" id="1_ip115"]
+[ext_resource type="Texture2D" uid="uid://cfa7wbrkxvjaj" path="res://icon.svg" id="2_t6t3e"]
+[ext_resource type="PackedScene" uid="uid://bgxsd0a4gr4lq" path="res://state_machine/state_machine.tscn" id="3_cgk2e"]
+[ext_resource type="Script" uid="uid://1c4i431lx4yo" path="res://drone/drones/follow.gd" id="4_boegd"]
+[ext_resource type="Script" uid="uid://dvjyqhn5psbc4" path="res://drone/drones/idle.gd" id="5_boegd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mwikr"]
+size = Vector2(29, 14)
+
+[node name="Drone" type="Node2D"]
+script = ExtResource("1_ip115")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.25, 0.121688)
+texture = ExtResource("2_t6t3e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_mwikr")
+
+[node name="StateMachine" parent="." instance=ExtResource("3_cgk2e")]
+
+[node name="Follow" type="Node2D" parent="StateMachine"]
+script = ExtResource("4_boegd")
+
+[node name="Idle" type="Node2D" parent="StateMachine"]
+script = ExtResource("5_boegd")
