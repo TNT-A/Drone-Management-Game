@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://b85n17siep8ln"]
+
+[ext_resource type="Script" uid="uid://ywjkmf0p1nxk" path="res://Player/player.gd" id="1_btcbx"]
+[ext_resource type="Texture2D" uid="uid://cfa7wbrkxvjaj" path="res://icon.svg" id="1_l8h54"]
+[ext_resource type="PackedScene" uid="uid://b34h5ttgq5cvn" path="res://components/wasd_move/wasd_move.tscn" id="3_gwnis"]
+[ext_resource type="PackedScene" uid="uid://dcs4pn557ooqs" path="res://Player/player_cam.tscn" id="4_gwnis"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hvfyp"]
+radius = 16.0
+height = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l8h54"]
+
+[node name="Player" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_btcbx")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_l8h54")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_hvfyp")
+
+[node name="Hurtbox" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Hurtbox"]
+shape = SubResource("CircleShape2D_l8h54")
+debug_color = Color(0.898039, 0.0352941, 0.27451, 0.419608)
+
+[node name="WASDMove" parent="CharacterBody2D" node_paths=PackedStringArray("host") instance=ExtResource("3_gwnis")]
+host = NodePath("..")
+speed = 250
+
+[node name="PlayerCam" parent="CharacterBody2D" instance=ExtResource("4_gwnis")]

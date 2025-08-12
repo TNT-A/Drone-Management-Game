@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b34h5ttgq5cvn"]
+
+[ext_resource type="Script" uid="uid://bfi1salptj8bq" path="res://wasd_move.gd" id="1_2t2ox"]
+
+[node name="WASDMove" type="Node2D"]
+script = ExtResource("1_2t2ox")
