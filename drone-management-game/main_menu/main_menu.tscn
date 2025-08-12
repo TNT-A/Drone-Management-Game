@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bpdrp33k2cy8g"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
