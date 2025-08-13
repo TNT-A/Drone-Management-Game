@@ -8,10 +8,17 @@ var main_menu : PackedScene = preload("res://main_menu/main_menu.tscn")
 #Bool funcs for various active states
 var is_paused : bool = false
 
+@export var scrap : int = 0
+
 func _ready() -> void:
 	SignalBus.pause_changed.connect(set_paused)
 	SignalBus.register_player.connect(register_player)
 	SignalBus.register_drone_hub.connect(register_drone_hub)
+	SignalBus.submit_resource.connect(process_resource)
+
+func process_resource(resource):
+	scrap += resource.value
+	print(scrap)
 
 func register_player(pot_player):
 	player = pot_player

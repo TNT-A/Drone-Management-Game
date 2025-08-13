@@ -2,11 +2,19 @@ extends Node2D
 class_name Carryable
 
 @export var weight = 1
+@export var value = 1
 
 var is_hovered : bool = false
 var is_carried : bool = false
 
 var carrier : Drone
+
+func _ready() -> void:
+	SignalBus.submit_resource.connect(use)
+
+func use(resource):
+	if self == resource:
+		queue_free()
 
 func _physics_process(delta: float) -> void:
 	if is_hovered:

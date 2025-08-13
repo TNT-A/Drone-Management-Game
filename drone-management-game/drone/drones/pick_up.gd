@@ -12,6 +12,8 @@ func enter():
 	hub = parent_body.hub
 	parent_body.velocity = Vector2(0,0)
 	weight_capacity = parent_body.weight_capacity
+	picking_up = true
+	can_pickup_carryable = true
 
 func physics_update(_delta: float):
 	if is_instance_valid(parent_body.carryable_target):
@@ -32,7 +34,8 @@ func pick_up():
 					parent_body.sprite.position = parent_body.sprite.position.lerp(Vector2(0,-15), 0.08)
 					parent_body.carryable_target.carrier = parent_body
 					parent_body.carryable_target.is_carried = true
-					parent_body.carryable_target = parent_body.current_carryable
+					parent_body.current_carryable = parent_body.carryable_target
+					parent_body.carryable_target = null
 					parent_body.can_pickup = false
 					picking_up = false
 				else:

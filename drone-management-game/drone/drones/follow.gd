@@ -39,6 +39,8 @@ func adjust_speed():
 func check_transitions():
 	if parent_body.at_target:
 		SignalBus.transitioned.emit(self, "Idle")
+	if parent_body.dropping_off:
+		SignalBus.transitioned.emit(self, "Dropoff")
 	if Input.is_action_pressed("Left_Click") and parent_body == hub.selected_drone:
 		print("Trying to transition")
 		SignalBus.transitioned.emit(self, "Search")

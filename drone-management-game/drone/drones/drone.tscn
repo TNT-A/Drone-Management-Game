@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsjkb5ro0gdfu"]
+[gd_scene load_steps=11 format=3 uid="uid://dsjkb5ro0gdfu"]
 
 [ext_resource type="Script" uid="uid://61wuemi4nef3" path="res://drone/drones/drone.gd" id="1_ip115"]
 [ext_resource type="Texture2D" uid="uid://cfa7wbrkxvjaj" path="res://icon.svg" id="2_t6t3e"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dvjyqhn5psbc4" path="res://drone/drones/idle.gd" id="5_boegd"]
 [ext_resource type="Script" uid="uid://c6ha0s66xhsng" path="res://drone/drones/search.gd" id="6_hl3mt"]
 [ext_resource type="Script" uid="uid://bektm13mll34n" path="res://drone/drones/pick_up.gd" id="7_o124n"]
+[ext_resource type="Script" uid="uid://b6isebsxv2lcj" path="res://drone/drones/dropoff.gd" id="8_jahdm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mwikr"]
 size = Vector2(36, 18)
@@ -31,7 +32,7 @@ shape = SubResource("RectangleShape2D_mwikr")
 
 [node name="PickupArea" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 shape = SubResource("CircleShape2D_o124n")
@@ -53,6 +54,10 @@ script = ExtResource("6_hl3mt")
 z_index = 1
 script = ExtResource("7_o124n")
 
+[node name="Dropoff" type="Node2D" parent="StateMachine"]
+z_index = 1
+script = ExtResource("8_jahdm")
+
 [node name="Shadow" type="ColorRect" parent="."]
 z_index = -5
 offset_left = -12.0
@@ -62,4 +67,5 @@ offset_bottom = 9.0
 color = Color(0, 0, 0, 1)
 
 [connection signal="area_shape_entered" from="PickupArea" to="StateMachine/Search" method="_on_pickup_area_area_shape_entered"]
+[connection signal="area_shape_entered" from="PickupArea" to="StateMachine/Dropoff" method="_on_pickup_area_area_shape_entered"]
 [connection signal="area_shape_exited" from="PickupArea" to="StateMachine/Search" method="_on_pickup_area_area_shape_exited"]

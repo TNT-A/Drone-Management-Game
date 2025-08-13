@@ -11,8 +11,9 @@ height = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l8h54"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
+collision_mask = 9
 script = ExtResource("1_btcbx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6rn8otrw2vyn"]
+[gd_scene load_steps=8 format=3 uid="uid://b6rn8otrw2vyn"]
 
 [ext_resource type="Texture2D" uid="uid://crcm7ag8yttd8" path="res://sprites/placeholders/grassPlaceholder.png" id="1_dakft"]
 [ext_resource type="PackedScene" uid="uid://b85n17siep8ln" path="res://Player/player.tscn" id="1_l1rk1"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dsjkb5ro0gdfu" path="res://drone/drones/drone.tscn" id="4_4fuuu"]
 [ext_resource type="PackedScene" uid="uid://cxueav32kdffg" path="res://debris/debris.tscn" id="5_dxrkv"]
 [ext_resource type="PackedScene" uid="uid://dks5ym64cris" path="res://game_UI/drone_ui.tscn" id="6_dakft"]
+[ext_resource type="PackedScene" uid="uid://du8e2eliqaq40" path="res://dropoff_spots/dropoff_spot.tscn" id="7_u5opy"]
 
 [node name="Game" type="Node2D"]
 
@@ -38,6 +39,24 @@ position = Vector2(281, 149)
 [node name="Drone5" parent="DroneHub" instance=ExtResource("4_4fuuu")]
 position = Vector2(281, 149)
 
+[node name="Debris7" parent="." instance=ExtResource("5_dxrkv")]
+position = Vector2(145, 321)
+
+[node name="Debris9" parent="." instance=ExtResource("5_dxrkv")]
+position = Vector2(270, 324)
+
+[node name="Debris8" parent="." instance=ExtResource("5_dxrkv")]
+position = Vector2(466, 329)
+
+[node name="Debris6" parent="." instance=ExtResource("5_dxrkv")]
+position = Vector2(502, 43)
+
+[node name="Debris10" parent="." instance=ExtResource("5_dxrkv")]
+position = Vector2(543, 240)
+
+[node name="Debris5" parent="." instance=ExtResource("5_dxrkv")]
+position = Vector2(358, 368)
+
 [node name="Debris" parent="." instance=ExtResource("5_dxrkv")]
 position = Vector2(424, 150)
 
@@ -53,3 +72,5 @@ position = Vector2(218, 263)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="DroneUI" parent="CanvasLayer" instance=ExtResource("6_dakft")]
+
+[node name="DropoffSpot" parent="." instance=ExtResource("7_u5opy")]

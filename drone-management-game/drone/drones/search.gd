@@ -10,6 +10,7 @@ var hovering : bool = false
 func enter():
 	speed = parent_body.speed
 	hub = parent_body.hub
+	hovering = false
 
 func physics_update(_delta: float):
 	if !is_instance_valid(hub):
@@ -28,19 +29,21 @@ func search():
 		#print("I'm searching")
 
 func _on_pickup_area_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	if area.owner is Carryable:
-		var current_carryable : Carryable = area.owner
-		if !current_carryable.is_carried and !current_carryable.is_hovered:
-			current_carryable.is_hovered = true 
-			hovering = true
-			parent_body.carryable_target = current_carryable
+	if is_instance_valid(area):
+		if area.owner is Carryable:
+			var current_carryable : Carryable = area.owner
+			if !current_carryable.is_carried and !current_carryable.is_hovered:
+				current_carryable.is_hovered = true 
+				hovering = true
+				parent_body.carryable_target = current_carryable
 
 func _on_pickup_area_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	if area.owner is Carryable:
-		var current_carryable : Carryable = area.owner
-		current_carryable.is_hovered = false 
-		hovering = false
-		parent_body.carryable_target = null
+	if is_instance_valid(area):
+		if area.owner is Carryable:
+			var current_carryable : Carryable = area.owner
+			current_carryable.is_hovered = false 
+			hovering = false
+			parent_body.carryable_target = null
 
 func check_transitions():
 	if !Input.is_action_pressed("Left_Click"):

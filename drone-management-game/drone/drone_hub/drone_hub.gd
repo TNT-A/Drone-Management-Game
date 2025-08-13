@@ -44,8 +44,8 @@ func _ready() -> void:
 	if len(drones) >= 1:
 		selected_drone = drones[0]
 		selected_num = 0
-		print("Selected a drone: ", selected_drone)
-		print(drones)
+		#print("Selected a drone: ", selected_drone)
+		#print(drones)
 	await get_parent().get_parent().ready
 	SignalBus.register_drone_hub.emit(self)
 
