@@ -1,33 +1,65 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsjkb5ro0gdfu"]
+[gd_scene load_steps=10 format=3 uid="uid://dsjkb5ro0gdfu"]
 
 [ext_resource type="Script" uid="uid://61wuemi4nef3" path="res://drone/drones/drone.gd" id="1_ip115"]
 [ext_resource type="Texture2D" uid="uid://cfa7wbrkxvjaj" path="res://icon.svg" id="2_t6t3e"]
 [ext_resource type="PackedScene" uid="uid://bgxsd0a4gr4lq" path="res://state_machine/state_machine.tscn" id="3_cgk2e"]
 [ext_resource type="Script" uid="uid://1c4i431lx4yo" path="res://drone/drones/follow.gd" id="4_boegd"]
 [ext_resource type="Script" uid="uid://dvjyqhn5psbc4" path="res://drone/drones/idle.gd" id="5_boegd"]
+[ext_resource type="Script" uid="uid://c6ha0s66xhsng" path="res://drone/drones/search.gd" id="6_hl3mt"]
+[ext_resource type="Script" uid="uid://bektm13mll34n" path="res://drone/drones/pick_up.gd" id="7_o124n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mwikr"]
-size = Vector2(29, 14)
+size = Vector2(36, 18)
 
-[node name="Drone" type="Node2D"]
-script = ExtResource("1_ip115")
+[sub_resource type="CircleShape2D" id="CircleShape2D_o124n"]
+radius = 25.02
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="Drone" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_ip115")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.121688)
 texture = ExtResource("2_t6t3e")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(-0.5, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mwikr")
 
-[node name="StateMachine" parent="." instance=ExtResource("3_cgk2e")]
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_o124n")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_cgk2e")]
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node2D" parent="StateMachine"]
+script = ExtResource("5_boegd")
 
 [node name="Follow" type="Node2D" parent="StateMachine"]
 script = ExtResource("4_boegd")
 
-[node name="Idle" type="Node2D" parent="StateMachine"]
-script = ExtResource("5_boegd")
+[node name="Search" type="Node2D" parent="StateMachine"]
+z_index = 1
+script = ExtResource("6_hl3mt")
+
+[node name="PickUp" type="Node2D" parent="StateMachine"]
+z_index = 1
+script = ExtResource("7_o124n")
+
+[node name="Shadow" type="ColorRect" parent="."]
+z_index = -5
+offset_left = -12.0
+offset_top = 1.0
+offset_right = 12.0
+offset_bottom = 9.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="area_shape_entered" from="PickupArea" to="StateMachine/Search" method="_on_pickup_area_area_shape_entered"]
+[connection signal="area_shape_exited" from="PickupArea" to="StateMachine/Search" method="_on_pickup_area_area_shape_exited"]

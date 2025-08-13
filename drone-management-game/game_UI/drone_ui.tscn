@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://dks5ym64cris"]
+
+[ext_resource type="Script" uid="uid://n0xepuy0mwl1" path="res://game_UI/drone_ui.gd" id="1_li1q5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wddrt"]
+font_size = 32
+font_color = Color(0.737255, 0.568627, 0, 1)
+
+[node name="DroneUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_li1q5")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = 559.0
+offset_top = 286.0
+offset_right = 647.0
+offset_bottom = 366.0
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+color = Color(0, 0, 0, 0.537255)
+
+[node name="Label" type="Label" parent="CenterContainer/ColorRect"]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+text = "0"
+label_settings = SubResource("LabelSettings_wddrt")
+horizontal_alignment = 1
+vertical_alignment = 1

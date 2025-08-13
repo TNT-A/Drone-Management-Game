@@ -1,7 +1,7 @@
 extends Node2D
 class_name State
 
-@onready var parent_body = get_parent().get_parent()
+@onready var parent_body : CharacterBody2D = get_parent().get_parent()
 
 func enter():
 	pass

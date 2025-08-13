@@ -27,4 +27,5 @@ func menu():
 	$MenuSure.visible = true
 
 func sure():
+	Engine.time_scale = 1.0
 	get_tree().change_scene_to_file("res://main_menu/main_menu.tscn")

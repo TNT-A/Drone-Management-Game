@@ -1,17 +1,55 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6rn8otrw2vyn"]
+[gd_scene load_steps=7 format=3 uid="uid://b6rn8otrw2vyn"]
 
+[ext_resource type="Texture2D" uid="uid://crcm7ag8yttd8" path="res://sprites/placeholders/grassPlaceholder.png" id="1_dakft"]
 [ext_resource type="PackedScene" uid="uid://b85n17siep8ln" path="res://Player/player.tscn" id="1_l1rk1"]
-[ext_resource type="Texture2D" uid="uid://crcm7ag8yttd8" path="res://sprites/grassPlaceholder.png" id="1_vasa2"]
+[ext_resource type="PackedScene" uid="uid://d4e2u54hxhdte" path="res://drone/drone_hub/drone_hub.tscn" id="3_h7iqs"]
+[ext_resource type="PackedScene" uid="uid://dsjkb5ro0gdfu" path="res://drone/drones/drone.tscn" id="4_4fuuu"]
+[ext_resource type="PackedScene" uid="uid://cxueav32kdffg" path="res://debris/debris.tscn" id="5_dxrkv"]
+[ext_resource type="PackedScene" uid="uid://dks5ym64cris" path="res://game_UI/drone_ui.tscn" id="6_dakft"]
 
 [node name="Game" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
+z_index = -10
 offset_left = -385.0
 offset_top = -242.0
 offset_right = 1172.0
 offset_bottom = 706.0
-texture = ExtResource("1_vasa2")
+texture = ExtResource("1_dakft")
 stretch_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("1_l1rk1")]
 position = Vector2(315, 178)
+
+[node name="DroneHub" parent="." instance=ExtResource("3_h7iqs")]
+
+[node name="Drone" parent="DroneHub" instance=ExtResource("4_4fuuu")]
+position = Vector2(281, 149)
+
+[node name="Drone2" parent="DroneHub" instance=ExtResource("4_4fuuu")]
+position = Vector2(281, 149)
+
+[node name="Drone3" parent="DroneHub" instance=ExtResource("4_4fuuu")]
+position = Vector2(281, 149)
+
+[node name="Drone4" parent="DroneHub" instance=ExtResource("4_4fuuu")]
+position = Vector2(281, 149)
+
+[node name="Drone5" parent="DroneHub" instance=ExtResource("4_4fuuu")]
+position = Vector2(281, 149)
+
+[node name="Debris" parent="." instance=ExtResource("5_dxrkv")]
+position = Vector2(424, 150)
+
+[node name="Debris2" parent="." instance=ExtResource("5_dxrkv")]
+position = Vector2(156, 164)
+
+[node name="Debris3" parent="." instance=ExtResource("5_dxrkv")]
+position = Vector2(394, 250)
+
+[node name="Debris4" parent="." instance=ExtResource("5_dxrkv")]
+position = Vector2(218, 263)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DroneUI" parent="CanvasLayer" instance=ExtResource("6_dakft")]
