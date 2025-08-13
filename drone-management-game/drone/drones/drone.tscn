@@ -12,8 +12,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mwikr"]
 size = Vector2(36, 18)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_o124n"]
-radius = 25.02
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jahdm"]
+size = Vector2(65, 38)
 
 [node name="Drone" type="CharacterBody2D"]
 z_index = 1
@@ -35,7 +35,8 @@ collision_layer = 0
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
-shape = SubResource("CircleShape2D_o124n")
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_jahdm")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_cgk2e")]
 initial_state = NodePath("Idle")

@@ -16,7 +16,7 @@ func physics_update(_delta: float):
 	if !is_instance_valid(hub):
 		hub = parent_body.hub
 	check_transitions()
-	parent_body.sprite.position = parent_body.sprite.position.lerp(Vector2(0,-30), 0.08)
+	parent_body.sprite.position = parent_body.sprite.position.lerp(Vector2(0,-15), 0.08)
 	search()
 
 func search():
@@ -36,6 +36,13 @@ func _on_pickup_area_area_shape_entered(area_rid: RID, area: Area2D, area_shape_
 				current_carryable.is_hovered = true 
 				hovering = true
 				parent_body.carryable_target = current_carryable
+
+#func spawn_debris(debris_scene, pos):
+	#var new_debris : Carryable = debris_scene.instantiate()
+	#new_debris.z_index = 1
+	#new_debris.scale = Vector2(1,1)
+	#add_child(new_debris)
+	#new_debris.global_position = pos
 
 func _on_pickup_area_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if is_instance_valid(area):
