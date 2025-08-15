@@ -7,6 +7,8 @@ var game_manager
 var selected_drone : Drone
 var selected_num
 
+var weight_capacity : int = 4
+
 var drones : Array[Node2D] = [
 	
 ]
@@ -36,6 +38,8 @@ var slot_adjustments : Array = [
 ]
 
 func _ready() -> void:
+	SignalBus.drone_upgraded.connect(add_new_drone)
+	SignalBus.weight_upgraded.connect(weight_up)
 	game_manager = get_parent().get_parent()
 	drones.clear()
 	for child in get_children():
@@ -49,6 +53,15 @@ func _ready() -> void:
 	await get_parent().get_parent().ready
 	SignalBus.register_drone_hub.emit(self)
 
+func weight_up():
+	weight_capacity += 1
+
+var drone_scene : PackedScene = preload("res://drone/drones/drone.tscn")
+func add_new_drone():
+	var new_drone = drone_scene.instantiate()
+	drones.append(new_drone)
+	add_child(new_drone)
+	new_drone.global_position = player.global_position
 
 func _physics_process(delta: float) -> void:
 	if !is_instance_valid(player):
@@ -56,6 +69,9 @@ func _physics_process(delta: float) -> void:
 	set_drone_slots()
 	#print(drone_slots)
 	set_targets()
+	for drone in drones:
+		drone.speed = player.speed
+		drone.weight_capacity = weight_capacity 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Scroll_Up"):

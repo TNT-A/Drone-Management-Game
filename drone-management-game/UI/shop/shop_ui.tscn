@@ -1,0 +1,267 @@
+[gd_scene load_steps=7 format=3 uid="uid://uetf67ylcwwu"]
+
+[ext_resource type="Script" uid="uid://robryhy5mnkc" path="res://UI/shop/shop_ui.gd" id="1_86wmq"]
+[ext_resource type="Theme" uid="uid://cycpu48hyq0jl" path="res://resources/shop_button.tres" id="1_fu8lj"]
+
+[sub_resource type="Animation" id="Animation_86wmq"]
+resource_name = "slide_down"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -360), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hnwk6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_b5abs"]
+resource_name = "slide_up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -360)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_86l2x"]
+_data = {
+&"RESET": SubResource("Animation_hnwk6"),
+&"slide_down": SubResource("Animation_86wmq"),
+&"slide_up": SubResource("Animation_b5abs")
+}
+
+[node name="ShopUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -360.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_86wmq")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(600, 340)
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+
+[node name="HFlowContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="HFlowContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/CenterContainer2"]
+z_index = 12
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+theme_override_colors/font_color = Color(0, 0.713726, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "You Have:
+"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="HFlowContainer"]
+custom_minimum_size = Vector2(400, 360)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HFlowContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HFlowContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ButtonDrone" type="Button" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+text = "Buy a New Drone"
+
+[node name="Label" type="Label" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/ButtonDrone"]
+offset_left = 57.0
+offset_top = 115.0
+offset_right = 185.0
+offset_bottom = 148.0
+theme_override_font_sizes/font_size = 32
+text = "10 Scrap"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+text = "Price: 3 Scrap"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonWeight" type="Button" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(96, 32)
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+text = "Weight"
+
+[node name="Label" type="Label" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+theme_override_colors/font_color = Color(1, 0.545098, 0, 1)
+text = "Lv. 1"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+text = "Price: 3 Scrap"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="ButtonSpeed" type="Button" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(96, 32)
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+text = "Speed"
+
+[node name="Label" type="Label" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+theme_override_colors/font_color = Color(1, 0.545098, 0, 1)
+text = "Lv. 1"
+horizontal_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+text = "Price: 3 Scrap"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="ButtonValue" type="Button" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(96, 32)
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+text = "Value
+"
+
+[node name="Label" type="Label" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+theme_override_colors/font_color = Color(1, 0.545098, 0, 1)
+text = "Lv. 1"
+horizontal_alignment = 1
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer4"]
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+text = "Price: 3 Scrap"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer4"]
+layout_mode = 2
+
+[node name="ButtonDamage" type="Button" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(96, 32)
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+text = "Damage"
+
+[node name="Label" type="Label" parent="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+theme_override_colors/font_color = Color(1, 0.545098, 0, 1)
+text = "Lv. 1"
+horizontal_alignment = 1
+
+[node name="ButtonWin" type="Button" parent="HFlowContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme = ExtResource("1_fu8lj")
+text = "     Win Game:"
+alignment = 0
+
+[node name="Label" type="Label" parent="HFlowContainer/CenterContainer/VBoxContainer/ButtonWin"]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 17.0
+offset_right = 337.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 32
+text = "250 Scrap"
+horizontal_alignment = 2
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_86l2x")
+}
+
+[connection signal="pressed" from="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/ButtonDrone" to="." method="_on_button_drone_pressed"]
+[connection signal="pressed" from="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/ButtonWeight" to="." method="_on_button_weight_pressed"]
+[connection signal="pressed" from="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/ButtonSpeed" to="." method="_on_button_speed_pressed"]
+[connection signal="pressed" from="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer/ButtonValue" to="." method="_on_button_value_pressed"]
+[connection signal="pressed" from="HFlowContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer4/HBoxContainer/ButtonDamage" to="." method="_on_button_damage_pressed"]
+[connection signal="pressed" from="HFlowContainer/CenterContainer/VBoxContainer/ButtonWin" to="." method="_on_button_win_pressed"]

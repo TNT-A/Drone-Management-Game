@@ -1,19 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://b85n17siep8ln"]
+[gd_scene load_steps=8 format=3 uid="uid://b85n17siep8ln"]
 
 [ext_resource type="Script" uid="uid://ywjkmf0p1nxk" path="res://Player/player.gd" id="1_btcbx"]
 [ext_resource type="Texture2D" uid="uid://cfa7wbrkxvjaj" path="res://icon.svg" id="1_l8h54"]
 [ext_resource type="PackedScene" uid="uid://b34h5ttgq5cvn" path="res://components/wasd_move/wasd_move.tscn" id="3_gwnis"]
 [ext_resource type="PackedScene" uid="uid://dcs4pn557ooqs" path="res://Player/player_cam.tscn" id="4_gwnis"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hvfyp"]
-radius = 16.0
-height = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gwnis"]
+size = Vector2(31, 9)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l8h54"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gwnis"]
+radius = 54.4518
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 1
 y_sort_enabled = true
-collision_mask = 25
+collision_mask = 29
 script = ExtResource("1_btcbx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -21,7 +24,8 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_l8h54")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_hvfyp")
+position = Vector2(-0.5, 10.5)
+shape = SubResource("RectangleShape2D_gwnis")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 
@@ -34,3 +38,13 @@ host = NodePath("..")
 speed = 250
 
 [node name="PlayerCam" parent="." instance=ExtResource("4_gwnis")]
+
+[node name="NotifierTrigger" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 31
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NotifierTrigger"]
+shape = SubResource("CircleShape2D_gwnis")
+
+[connection signal="area_shape_entered" from="Hurtbox" to="." method="_on_hurtbox_area_shape_entered"]
+[connection signal="area_shape_entered" from="NotifierTrigger" to="." method="_on_notifier_trigger_area_shape_entered"]

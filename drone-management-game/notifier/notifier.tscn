@@ -1,0 +1,201 @@
+[gd_scene load_steps=12 format=3 uid="uid://bp6quts8m56fq"]
+
+[ext_resource type="Script" uid="uid://cna834x0n3a72" path="res://notifier/notifier.gd" id="1_0lhyl"]
+
+[sub_resource type="Animation" id="Animation_5soyk"]
+resource_name = "pop_up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 360), Vector2(0, 320)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.945098)]
+}
+
+[sub_resource type="Animation" id="Animation_yy18l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 360)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_n66wo"]
+resource_name = "pop_down"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 320), Vector2(0, 360)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_td20r"]
+_data = {
+&"RESET": SubResource("Animation_yy18l"),
+&"pop_down": SubResource("Animation_n66wo"),
+&"pop_up": SubResource("Animation_5soyk")
+}
+
+[sub_resource type="Animation" id="Animation_0lhyl"]
+resource_name = "pop_up"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -60), Vector2(0, 20)]
+}
+
+[sub_resource type="Animation" id="Animation_eiide"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -60)]
+}
+
+[sub_resource type="Animation" id="Animation_aew8f"]
+resource_name = "pop_down"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 20), Vector2(0, -60)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aew8f"]
+_data = {
+&"RESET": SubResource("Animation_eiide"),
+&"pop_down": SubResource("Animation_aew8f"),
+&"pop_up": SubResource("Animation_0lhyl")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_eiide"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0lhyl"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[node name="Notifier" type="Node2D"]
+script = ExtResource("1_0lhyl")
+
+[node name="MinorAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_td20r")
+}
+
+[node name="MajorAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_aew8f")
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+z_index = 15
+offset_left = 1.0
+offset_top = 374.0
+offset_right = 641.0
+offset_bottom = 414.0
+
+[node name="LowerNotif" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "Notification!"
+label_settings = SubResource("LabelSettings_eiide")
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+offset_left = 1.0
+offset_top = -57.0
+offset_right = 641.0
+offset_bottom = -12.0
+
+[node name="MajorNotif" type="Label" parent="CenterContainer2"]
+layout_mode = 2
+text = "Notification!"
+label_settings = SubResource("LabelSettings_0lhyl")
+
+[node name="MinorTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="MajorTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="MinorTimer" to="." method="_on_minor_timer_timeout"]
+[connection signal="timeout" from="MajorTimer" to="." method="_on_major_timer_timeout"]

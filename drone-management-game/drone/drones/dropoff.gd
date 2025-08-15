@@ -14,6 +14,9 @@ func enter():
 	current_carryable = parent_body.current_carryable
 	dropping_off = true
 	found_drop_point = false
+	if parent_body.sprite:
+		parent_body.sprite.play(parent_body.drone_type_string + "_walk")
+		#print("setting animation")
 
 func physics_update(_delta: float):
 	if !is_instance_valid(hub):

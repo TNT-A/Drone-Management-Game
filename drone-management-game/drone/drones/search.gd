@@ -11,6 +11,9 @@ func enter():
 	speed = parent_body.speed
 	hub = parent_body.hub
 	hovering = false
+	if parent_body.sprite:
+		parent_body.sprite.play(parent_body.drone_type_string + "_search")
+		#print("setting animation")
 
 func physics_update(_delta: float):
 	if !is_instance_valid(hub):

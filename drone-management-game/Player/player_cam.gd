@@ -22,3 +22,9 @@ func get_direction():
 	if Input.is_action_pressed("Move_Right"):
 		input.x +=1
 	return input
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_up"):
+		zoom *= 1.2
+	if event.is_action_pressed("ui_down"):
+		zoom /= 1.2

@@ -5,7 +5,9 @@ var hub : DroneHub
 
 func enter():
 	hub = parent_body.hub
-	#print(hub)
+	if parent_body.sprite:
+		parent_body.sprite.play(parent_body.drone_type_string + "_idle")
+		#print("setting animation")
 
 func physics_update(_delta: float):
 	if !is_instance_valid(hub):

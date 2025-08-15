@@ -2,7 +2,7 @@ extends Node2D
 class_name Drone
 
 @onready var hub : DroneHub = get_parent()
-@onready var sprite : Sprite2D = $Sprite2D
+@onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 
 @export var weight_capacity : int = 3
 
@@ -18,8 +18,11 @@ var current_carryable : Carryable
 
 var dropoff_spot : Vector2 = Vector2(0, 0)
 
+var drone_type_string : String = "drone_1"
+
 func _ready() -> void:
 	SignalBus.dropoff.connect(dropoff)
+	sprite.play(drone_type_string + "_idle")
 
 func dropoff(drop_zone):
 	if is_instance_valid(current_carryable):
@@ -31,8 +34,13 @@ func dropoff(drop_zone):
 
 func _physics_process(delta: float) -> void:
 	check_target()
+	if target.x - global_position.x > 0:
+		sprite.flip_h = false
+	else:
+		sprite.flip_h = true
 	if is_instance_valid(current_carryable):
 		can_pickup = false
+	
 
 func check_target():
 	var dist = global_position.distance_to(target)

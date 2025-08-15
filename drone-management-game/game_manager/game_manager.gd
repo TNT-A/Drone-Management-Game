@@ -7,17 +7,23 @@ var main_menu : PackedScene = preload("res://main_menu/main_menu.tscn")
 
 #Bool funcs for various active states
 var is_paused : bool = false
-
-@export var scrap : int = 0
+var has_notified : bool = false
+@export var scrap : int = 1000
 
 func _ready() -> void:
 	SignalBus.pause_changed.connect(set_paused)
 	SignalBus.register_player.connect(register_player)
 	SignalBus.register_drone_hub.connect(register_drone_hub)
 	SignalBus.submit_resource.connect(process_resource)
+	SignalBus.value_upgraded.connect(value_up)
+	SignalBus.minor_notif.emit("I should bring scrap here.", 10.0)
+
+var value_boost : int = 0
+func value_up():
+	value_boost += 1
 
 func process_resource(resource):
-	scrap += resource.value
+	scrap += resource.value + value_boost
 	print(scrap)
 
 func register_player(pot_player):
@@ -33,6 +39,7 @@ func _input(event: InputEvent) -> void:
 		set_paused()
 
 func set_paused():
+	$CanvasLayer/ShopUI.visible = false
 	if is_paused:
 		is_paused = false
 	else:

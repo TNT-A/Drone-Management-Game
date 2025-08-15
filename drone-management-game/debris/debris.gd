@@ -9,7 +9,33 @@ var is_carried : bool = false
 
 var carrier : Drone
 
+var scrap_type : String = "silver"
+
+var debris_sprites : Dictionary = {
+	"rusty" = preload("res://sprites/scrap/rusty_scrap.png"),
+	"silver" = preload("res://sprites/scrap/silver_scrap.png"),
+	"spirit" = preload("res://sprites/scrap/spirit_scrap.png"),
+	"gold" = preload("res://sprites/scrap/gold_scrap.png")
+}
+
+var debris_values : Dictionary = {
+	"rusty" = 1,
+	"silver" = 5,
+	"spirit" = 20,
+	"gold" = 50
+}
+
+var debris_weights : Dictionary = {
+	"rusty" = 1,
+	"silver" = 3,
+	"spirit" = 5,
+	"gold" = 7
+}
+
 func _ready() -> void:
+	$Sprite2D.texture = debris_sprites[scrap_type]
+	value = debris_values[scrap_type]
+	weight = debris_weights[scrap_type]
 	SignalBus.submit_resource.connect(use)
 
 func use(resource):

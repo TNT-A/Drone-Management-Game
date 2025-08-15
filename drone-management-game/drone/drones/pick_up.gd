@@ -14,6 +14,9 @@ func enter():
 	weight_capacity = parent_body.weight_capacity
 	picking_up = true
 	can_pickup_carryable = true
+	if parent_body.sprite:
+		parent_body.sprite.play(parent_body.drone_type_string + "_land")
+		#print("setting animation")
 
 func physics_update(_delta: float):
 	if is_instance_valid(parent_body.carryable_target):

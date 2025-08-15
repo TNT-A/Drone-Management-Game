@@ -7,6 +7,7 @@ var acceleration : float = 0.2
 var accept_input : bool = true
 
 func _physics_process(delta: float) -> void:
+	speed = get_parent().speed
 	move()
 
 func get_direction():

@@ -5,9 +5,18 @@ var hub : DroneHub
 var target : Vector2
 var speed : int
 
+func _ready() -> void:
+	SignalBus.speed_upgraded.connect(up_speed)
+
+func up_speed():
+	speed += 50
+
 func enter():
 	speed = parent_body.speed
 	hub = parent_body.hub
+	if parent_body.sprite:
+		parent_body.sprite.play(parent_body.drone_type_string + "_walk")
+		#print("setting animation")
 
 func physics_update(_delta: float):
 	if !is_instance_valid(hub):
@@ -24,7 +33,7 @@ func follow():
 	parent_body.move_and_slide()
 	#print(target, " ", global_position, " ", parent_body.velocity)
 
-var max_speed = 300
+var max_speed = 400
 var min_speed = 50
 var base_speed = 200
 var target_dist = 65
