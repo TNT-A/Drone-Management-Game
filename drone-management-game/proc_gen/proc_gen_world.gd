@@ -35,6 +35,7 @@ var tree_atlas_array : Array = [Vector2i(0,24), Vector2i(4,24), Vector2i(0,24), 
 func _ready() -> void:
 	noise = noise_height_text.noise
 	tree_noise = noise_tree_text.noise
+	noise.seed = randi_range(1,1000)
 	generate_world()
 
 func generate_world():
@@ -48,11 +49,12 @@ func generate_world():
 				snow_tile_array.append(Vector2i(x,y))
 				if noise_val >= -0.3:
 					snow_patch_tile_array.append(Vector2i(x,y))
-					if noise_val > 0.08:
+					if noise_val > 0.12:
 						patch_decor.set_cell(Vector2i(x,y), source_id, patch_decor_array.pick_random())
-					if noise_val >= 0.1:
+					if noise_val >= 0.2:
 						cliff_tile_array.append(Vector2i(x,y))
-			water.set_cell(Vector2(x,y), source_id, water_atlas)
+			if noise_val < -0.3:
+				water.set_cell(Vector2(x,y), source_id, water_atlas)
 	
 	set_player_base()
 	snow_water.set_cells_terrain_connect(snow_tile_array, terrain_snow_int, 0)
@@ -77,7 +79,7 @@ func set_player_base():
 					snow_patch_tile_array.remove_at(snow_patch_tile_array.find(current_cell))
 				if cliff_tile_array.has(current_cell):
 					cliff_tile_array.remove_at(cliff_tile_array.find(current_cell))
-				snow_patch.set_cell(current_cell, source_id, Vector2i(23, 12))
+				snow_patch.set_cell(current_cell, source_id, Vector2i(20, 2))
 
 @export var debris_count : int = 200
 func generate_debris():
@@ -99,7 +101,7 @@ func spawn_debris(debris_position):
 	new_debris.global_position = debris_position
 
 var gold_max : int = 8
-var spirit_max : int = 15
+var spirit_max : int = 20
 
 var silver_threshhold = 3200
 var spirit_threshhold = 4700

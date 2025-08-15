@@ -36,10 +36,10 @@ func follow():
 var max_speed = 400
 var min_speed = 50
 var base_speed = 200
-var target_dist = 65
+var target_dist = 100
 func adjust_speed():
 	var dist = parent_body.global_position.distance_to(target)
-	speed = base_speed*(dist-target_dist)
+	speed = base_speed*(dist-target_dist/2)
 	if speed >= max_speed:
 		speed = max_speed
 	if speed <= min_speed:

@@ -73,15 +73,16 @@ func _physics_process(delta: float) -> void:
 		drone.speed = player.speed
 		drone.weight_capacity = weight_capacity 
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Scroll_Up"):
 		selected_num += 1
-		if selected_num > 4:
+		if selected_num > len(drones) -1:
 			selected_num = 0
 	if event.is_action_pressed("Scroll_Down"):
 		selected_num -= 1
 		if selected_num < 0:
-			selected_num = 4
+			selected_num = len(drones) -1
 	selected_drone = drones[selected_num]
 
 func set_drone_slots():

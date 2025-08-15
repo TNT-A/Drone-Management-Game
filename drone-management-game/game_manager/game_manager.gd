@@ -8,7 +8,7 @@ var main_menu : PackedScene = preload("res://main_menu/main_menu.tscn")
 #Bool funcs for various active states
 var is_paused : bool = false
 var has_notified : bool = false
-@export var scrap : int = 1000
+@export var scrap : int = 0
 
 func _ready() -> void:
 	SignalBus.pause_changed.connect(set_paused)
@@ -16,7 +16,11 @@ func _ready() -> void:
 	SignalBus.register_drone_hub.connect(register_drone_hub)
 	SignalBus.submit_resource.connect(process_resource)
 	SignalBus.value_upgraded.connect(value_up)
+	SignalBus.win_game.connect(game_win)
 	SignalBus.minor_notif.emit("I should bring scrap here.", 10.0)
+
+func game_win():
+	get_tree().change_scene_to_file("res://UI/end_screen/end.tscn")
 
 var value_boost : int = 0
 func value_up():

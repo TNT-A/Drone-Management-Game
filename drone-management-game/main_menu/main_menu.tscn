@@ -1,13 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpdrp33k2cy8g"]
+[gd_scene load_steps=5 format=3 uid="uid://bpdrp33k2cy8g"]
 
 [ext_resource type="Script" uid="uid://sa7awlt65234" path="res://main_menu/main_menu.gd" id="1_oa53l"]
+[ext_resource type="FontFile" uid="uid://bt5usmohcxfl5" path="res://sprites/Vaticanus-G3yVG.ttf" id="2_3shxk"]
+[ext_resource type="Theme" uid="uid://cycpu48hyq0jl" path="res://shop_button.tres" id="3_bws42"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1h4yd"]
+font_size = 64
+font_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_oa53l")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -73.0
+offset_top = -53.0
+offset_right = 754.0
+offset_bottom = 509.0
+color = Color(0.976471, 0.623529, 0.164706, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
@@ -15,16 +27,21 @@ offset_right = 640.0
 offset_bottom = 360.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Drone Game :D"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_3shxk")
+theme_override_font_sizes/font_size = 128
+text = "Abandroned"
 label_settings = SubResource("LabelSettings_1h4yd")
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_bws42")
 text = "OOH YEA!!!! "
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

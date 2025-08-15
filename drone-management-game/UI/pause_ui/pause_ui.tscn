@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ds7dndwsnwkyn"]
+[gd_scene load_steps=3 format=3 uid="uid://ds7dndwsnwkyn"]
 
 [ext_resource type="Script" uid="uid://d37ifsxmxf0ua" path="res://UI/pause_ui/pause_ui.gd" id="1_qliqw"]
+[ext_resource type="Theme" uid="uid://cycpu48hyq0jl" path="res://shop_button.tres" id="2_k1gpb"]
 
 [node name="PauseUI" type="Control"]
 z_index = 10
@@ -31,16 +32,19 @@ layout_mode = 2
 [node name="ButtonBack" type="Button" parent="MenuList/VBoxContainer"]
 custom_minimum_size = Vector2(320, 48)
 layout_mode = 2
+theme = ExtResource("2_k1gpb")
 text = "Back to Game"
 
 [node name="ButtonSettings" type="Button" parent="MenuList/VBoxContainer"]
 custom_minimum_size = Vector2(320, 48)
 layout_mode = 2
+theme = ExtResource("2_k1gpb")
 text = "Settings"
 
 [node name="ButtonMenu" type="Button" parent="MenuList/VBoxContainer"]
 custom_minimum_size = Vector2(320, 48)
 layout_mode = 2
+theme = ExtResource("2_k1gpb")
 text = "Back to Main Menu?"
 
 [node name="MenuSure" type="CenterContainer" parent="."]
@@ -55,11 +59,13 @@ layout_mode = 2
 [node name="ButtonSure" type="Button" parent="MenuSure/VBoxContainer"]
 custom_minimum_size = Vector2(320, 48)
 layout_mode = 2
+theme = ExtResource("2_k1gpb")
 text = "Are You Sure?"
 
 [node name="ButtonBackToPause" type="Button" parent="MenuSure/VBoxContainer"]
 custom_minimum_size = Vector2(320, 48)
 layout_mode = 2
+theme = ExtResource("2_k1gpb")
 text = "Back to Pause"
 
 [connection signal="pressed" from="MenuList/VBoxContainer/ButtonBack" to="." method="_on_button_back_pressed"]
